@@ -1,24 +1,21 @@
 #
-# Copyright (C) 2015-2016 OpenWrt.org
+# Copyright (C) 2015-2020 OpenWrt.org
 #
 # This is free software, licensed under the GNU General Public License v3.
 #
-# licheng
-# www.maxlicheng.com
-# 2019-07-28
 #
 
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=UnblockNeteaseMusic
-PKG_VERSION:=0.20.0
-PKG_RELEASE:=1
+PKG_VERSION:=0.24.1
+PKG_RELEASE:=2
 
 PKG_LICENSE:=MIT
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/nondanee/UnblockNeteaseMusic.git
-PKG_SOURCE_VERSION:=3de1af9d4c9e32de70ed8abe7bf63a6f2275bea8
+PKG_SOURCE_VERSION:=0bc075540bca3c41bb6243cecdb5fc8a7c13a986
 
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)
 PKG_SOURCE:=$(PKG_SOURCE_SUBDIR)-$(PKG_VERSION).tar.gz
@@ -34,6 +31,7 @@ define Package/$(PKG_NAME)
 	DEPENDS:=+node 
 	URL:=https://github.com/nondanee/UnblockNeteaseMusic/releases
 	SUBMENU:=NeteaseMusic
+	PKGARCH:=all
 endef
 
 define Package/$(PKG_NAME)/description
@@ -42,6 +40,9 @@ endef
 
 define Build/Prepare
 	tar -xzvf $(DL_DIR)/$(PKG_SOURCE) -C $(PKG_BUILD_DIR)
+	mkdir -p $(PKG_BUILD_DIR)/$(PKG_NAME)
+	echo -e $(PKG_VERSION) > $(PKG_BUILD_DIR)/$(PKG_NAME)/core_ver
+	echo -e $(PKG_SOURCE_VERSION) > $(PKG_BUILD_DIR)/$(PKG_NAME)/local_ver
 endef
 
 define Build/Configure
