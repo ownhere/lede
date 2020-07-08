@@ -36,7 +36,8 @@ define Package/ipt2socks/conffiles
 /etc/config/ipt2socks
 endef
 
-MAKE_FLAGS += LIBS="-l:libuv_a.a"
+#MAKE_FLAGS += LIBS="-l:libuv_a.a"
+MAKE_FLAGS += LIBS="-l:libuv.a"
 
 define Package/ipt2socks/install
 	$(INSTALL_DIR) $(1)/usr/bin
